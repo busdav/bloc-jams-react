@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+// import sunset from '../assets/images/sunset.jpg';
 
+// const bg = {
+//   width: "100%",
+//   height: "100%",
+//   backgroundImage: `url(${sunset})`,
+
+//   /* Add the blur effect */
+//   // filter: "blur(2px)",
+//   // WebkitFilter: "blur(2px)",
+
+//   /* Center and scale the image nicely */
+//   backgroundPosition: "center",
+//   backgroundRepeat: "no-repeat",
+//   backgroundSize: "cover",
+// };
 class Album extends Component {
   constructor(props) {
     super(props);
@@ -111,59 +126,65 @@ class Album extends Component {
 
   render() {
     return (
-      <section className="album">
-        <section id="album-info">
-        <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
-          <div className="album-details">
-            <h1 id="album-title">{this.state.album.title}</h1>
-            <h2 className="artist">{this.state.album.artist}</h2>
-            <div id="release-info">{this.state.album.releaseInfo}</div>
+      <section className="album" style={{backgroundColor: "lightCyan"}}>
+        <div className="row">
+          <div className="col-md-6">
+            <section className="card" id="album-info" style={{width: "30rem"}}>
+              <img className="card-img-top" id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
+              <div className="card-body">
+                <h4 id="album-title">{this.state.album.title}</h4>
+                <h6 className="artist">{this.state.album.artist}</h6>
+                <div id="release-info">{this.state.album.releaseInfo}</div>
+              </div>
+            </section>
           </div>
-        </section>
-        <table id="song-list">
-          <colgroup>
-            <col id="song-number-column" />
-            <col id="song-title-column" />
-            <col id="song-duration-column" />
-          </colgroup>  
-          <tbody>
-            {
-              this.state.album.songs.map( (song, index) => 
-                <tr className="song" key={index} onClick={() => this.handleSongClick(song)} 
-                  onMouseEnter={() => this.setState({isHovered: index+1})}
-                  onMouseLeave={() => this.setState({isHovered: false})}>
-                  <td className="song-actions">
-                    <button id="song-action-btns">
-                    { (this.state.currentSong.title === song.title) ?
-                        <span className={this.state.isPlaying ? "ion-md-pause" : "ion-md-play"}></span>
-                        :
-                        (this.state.isHovered === index+1) ?
-                          <span className="ion-md-play"></span>
-                          :
-                          <span className="song-number">{index+1}</span>
-                    }
-                    </button>
-                  </td>
-                  <td>{song.title}</td>
-                  <td>{this.formatTime(song.duration)}</td>
-                </tr>
-              )
-            }
-          </tbody>
-        </table>
-          <PlayerBar
-          isPlaying={this.state.isPlaying}
-          currentSong={this.state.currentSong}
-          currentTime={this.audioElement.currentTime}
-          duration={this.audioElement.duration}
-          volume={this.audioElement.volume}
-          handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-          handlePrevClick={() => this.handlePrevClick()}
-          handleNextClick={() => this.handleNextClick()}
-          handleTimeChange={(e) => this.handleTimeChange(e)}
-          handleVolumeChange={(e) => this.handleVolumeChange(e)}
-          formatTime={(time) => this.formatTime(time)}
-        />
+          <div className="col-md-6" style={{"margin-top": "3rem"}}>
+            <table id="song-list">
+              <colgroup>
+                <col id="song-number-column" />
+                <col id="song-title-column" />
+                <col id="song-duration-column" />
+              </colgroup>  
+              <tbody>
+                {
+                  this.state.album.songs.map( (song, index) => 
+                    <tr className="song" key={index} onClick={() => this.handleSongClick(song)} 
+                      onMouseEnter={() => this.setState({isHovered: index+1})}
+                      onMouseLeave={() => this.setState({isHovered: false})}>
+                      <td className="song-actions">
+                        <button id="song-action-btns">
+                        { (this.state.currentSong.title === song.title) ?
+                            <span className={this.state.isPlaying ? "ion-md-pause" : "ion-md-play"}></span>
+                            :
+                            (this.state.isHovered === index+1) ?
+                              <span className="ion-md-play"></span>
+                              :
+                              <span className="song-number">{index+1}</span>
+                        }
+                        </button>
+                      </td>
+                      <td>{song.title}</td>
+                      <td>{this.formatTime(song.duration)}</td>
+                    </tr>
+                  )
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+            <PlayerBar
+            isPlaying={this.state.isPlaying}
+            currentSong={this.state.currentSong}
+            currentTime={this.audioElement.currentTime}
+            duration={this.audioElement.duration}
+            volume={this.audioElement.volume}
+            handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+            handlePrevClick={() => this.handlePrevClick()}
+            handleNextClick={() => this.handleNextClick()}
+            handleTimeChange={(e) => this.handleTimeChange(e)}
+            handleVolumeChange={(e) => this.handleVolumeChange(e)}
+            formatTime={(time) => this.formatTime(time)}
+          />
       </section>
     );
   }
