@@ -1,7 +1,7 @@
 # Bloc Jams
 #### a digital music player built with ReactJS
 
-![screenshot](https://github.com/OverKatE/bloc-jams-react/blob/master/public/assets/images/bloc_jams_react_screenshots.gif)
+![screenshot](https://github.com/)
 
 ***
 
