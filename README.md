@@ -1,8 +1,6 @@
 # Bloc Jams
 #### a digital music player built with ReactJS
 
-![screenshot](https://github.com/)
-
 ***
 
 ##### What's used:
